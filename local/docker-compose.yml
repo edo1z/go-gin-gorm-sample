@@ -1,0 +1,28 @@
+version: "3.7"
+services:
+  api:
+    build: ./api
+    ports:
+      - "8080:8080"
+    volumes:
+      - ../src:/go/src
+    depends_on:
+      - db
+    command: /bin/sh -c "go mod tidy && air -c .air.toml"
+    image: go-gin-gorm-sample-api
+    container_name: go-gin-gorm-sample-api
+  db:
+    build: ./db
+    restart: always
+    environment:
+      POSTGRES_DB: 'database'
+      POSTGRES_USER: 'user'
+      POSTGRES_PASSWORD: 'password'
+    ports:
+      - "5433:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    image: go-gin-gorm-sample-db
+    container_name: go-gin-gorm-sample-db
+volumes:
+  db_data:

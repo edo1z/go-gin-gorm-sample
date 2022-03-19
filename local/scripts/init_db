@@ -1,0 +1,4 @@
+cd /app
+echo "start database setup"
+sqlx migrate run
+chown -R 1000:1001 /api
