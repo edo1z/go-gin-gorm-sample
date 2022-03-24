@@ -1,0 +1,2 @@
+docker exec local_api_1 sqlx migrate $1 $2 $3
+docker exec local_api_1 chown -R 1000:1001 /api

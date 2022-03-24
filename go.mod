@@ -1,4 +1,4 @@
-module github.com/web3ten0/go-gin-gorm-sample
+module web3ten0/go-gin-gorm-sample
 
 go 1.17
 
