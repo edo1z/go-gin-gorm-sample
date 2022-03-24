@@ -9,6 +9,12 @@ docker-compose up -d
 sh scripts/exec_init_db
 ```
 
+## Config
+
+```shell
+cp config.json.example config.json
+```
+
 ## Migration
 
 - 参照: https://github.com/launchbadge/sqlx/tree/master/sqlx-cli

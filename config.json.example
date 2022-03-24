@@ -1,0 +1,13 @@
+{
+  "debug": true,
+  "server":{
+    "address":":9090"
+  },
+  "db": {
+    "host": "db",
+    "port": "5432",
+    "user": "user",
+    "pass": "password",
+    "name": "database"
+  }
+}
