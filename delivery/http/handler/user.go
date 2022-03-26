@@ -9,15 +9,15 @@ import (
 )
 
 type UserHandler struct {
-	uu domain.UserUsecase
+	userUsecase domain.UserUsecase
 }
 
 func NewUserHandler(uu domain.UserUsecase) *UserHandler {
-	return &UserHandler{uu: uu}
+	return &UserHandler{userUsecase: uu}
 }
 
 func (u *UserHandler) GetAll(c *gin.Context) {
-	users, err := u.uu.GetAll()
+	users, err := u.userUsecase.GetAll()
 	if err != nil {
 		c.String(http.StatusInternalServerError, err.Error())
 	} else {

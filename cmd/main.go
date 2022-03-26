@@ -13,12 +13,20 @@ func main() {
 	defer postgres.DbClose(db)
 
 	userRepo := postgres.NewUserRepo(db)
+	categoryRepo := postgres.NewCategoryRepo(db)
+	postRepo := postgres.NewPostRepo(db)
+
 	userUsecase := usecase.NewUserUsecase(userRepo)
+	categoryUsecase := usecase.NewCategoryUsecase(categoryRepo)
+	postUsecase := usecase.NewPostUsecase(postRepo)
+
 	userHandler := handler.NewUserHandler(userUsecase)
+	categoryHandler := handler.NewCategoryHandler(categoryUsecase)
+	postHandler := handler.NewPostHandler(postUsecase)
 
 	r := gin.Default()
 	r.GET("/users", userHandler.GetAll)
-	r.GET("/categories", handler.GetCategories)
-	r.GET("/posts", handler.GetPosts)
+	r.GET("/categories", categoryHandler.GetAll)
+	r.GET("/posts", postHandler.GetAll)
 	r.Run()
 }

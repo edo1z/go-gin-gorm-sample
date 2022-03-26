@@ -9,7 +9,9 @@ type Post struct {
 }
 
 type PostUsecase interface {
+	GetAll() ([]*Post, error)
 }
 
 type PostRepository interface {
+	GetAll() ([]*Post, error)
 }
