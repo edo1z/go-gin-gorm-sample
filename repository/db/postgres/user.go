@@ -19,3 +19,9 @@ func (r *userRepo) GetAll() ([]*domain.User, error) {
 	result := r.db.Find(&users)
 	return users, result.Error
 }
+
+func (r *userRepo) GetAllByName(name string) ([]*domain.User, error) {
+	var users []*domain.User
+	result := r.db.Where("name LIKE ?", "%"+name+"%").Find(&users)
+	return users, result.Error
+}

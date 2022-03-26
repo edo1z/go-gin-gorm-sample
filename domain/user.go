@@ -1,16 +1,17 @@
 package domain
 
 type User struct {
-	Id   int    `json:"id"`
+	ID   uint   `json:"id" gorm:"primaryKey"`
 	Name string `json:"name"`
 	Msg  string `json:"msg"`
 	Age  int    `json:"age"`
 }
 
 type UserUsecase interface {
-	GetAll() ([]*User, error)
+	GetAll(name string) ([]*User, error)
 }
 
 type UserRepository interface {
 	GetAll() ([]*User, error)
+	GetAllByName(name string) ([]*User, error)
 }

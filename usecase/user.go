@@ -12,6 +12,10 @@ func NewUserUsecase(u domain.UserRepository) domain.UserUsecase {
 	return &userUsecase{userRepo: u}
 }
 
-func (u *userUsecase) GetAll() ([]*domain.User, error) {
-	return u.userRepo.GetAll()
+func (u *userUsecase) GetAll(name string) ([]*domain.User, error) {
+	if name == "" {
+		return u.userRepo.GetAll()
+	} else {
+		return u.userRepo.GetAllByName(name)
+	}
 }
