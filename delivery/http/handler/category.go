@@ -1,7 +1,6 @@
 package handler
 
 import (
-	"log"
 	"net/http"
 	"web3ten0/go-gin-gorm-sample/domain"
 
@@ -21,7 +20,6 @@ func (h *CategoryHandler) GetAll(c *gin.Context) {
 	if err != nil {
 		c.String(http.StatusInternalServerError, err.Error())
 	} else {
-		log.Println("categories length:", len(categories))
-		c.String(http.StatusOK, "OK")
+		c.JSON(http.StatusOK, categories)
 	}
 }

@@ -1,6 +1,8 @@
 package usecase
 
-import "web3ten0/go-gin-gorm-sample/domain"
+import (
+	"web3ten0/go-gin-gorm-sample/domain"
+)
 
 type userUsecase struct {
 	userRepo domain.UserRepository

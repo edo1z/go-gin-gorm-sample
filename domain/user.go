@@ -1,10 +1,10 @@
 package domain
 
 type User struct {
-	Id   int
-	Name string
-	Msg  string
-	Age  int
+	Id   int    `json:"id"`
+	Name string `json:"name"`
+	Msg  string `json:"msg"`
+	Age  int    `json:"age"`
 }
 
 type UserUsecase interface {

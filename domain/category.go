@@ -1,8 +1,8 @@
 package domain
 
 type Category struct {
-	Id   int
-	Name string
+	Id   int    `json:"id"`
+	Name string `json:"name"`
 }
 
 type CategoryUsecase interface {
