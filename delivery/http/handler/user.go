@@ -17,13 +17,13 @@ func NewUserHandler(uu domain.UserUsecase) *UserHandler {
 	return &UserHandler{userUsecase: uu}
 }
 
-func (u *UserHandler) GetAll(c *gin.Context) {
+func (h *UserHandler) GetAll(c *gin.Context) {
 	var query viewmodel.GetUsersRquest
 	if err := c.ShouldBindQuery(&query); err != nil {
 		response.Json(http.StatusBadRequest, nil, err, c)
 		return
 	}
-	users, err := u.userUsecase.GetAll(query.Name)
+	users, err := h.userUsecase.GetAll(query.Name)
 	if err != nil {
 		response.Json(http.StatusInternalServerError, nil, err, c)
 	} else {

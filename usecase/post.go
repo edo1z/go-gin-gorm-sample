@@ -10,6 +10,10 @@ func NewPostUsecase(r domain.PostRepository) domain.PostUsecase {
 	return &postUsecase{postRepo: r}
 }
 
-func (u *postUsecase) GetAll() ([]*domain.Post, error) {
-	return u.postRepo.GetAll()
+func (u *postUsecase) GetAll(title string) ([]*domain.Post, error) {
+	if title == "" {
+		return u.postRepo.GetAll()
+	} else {
+		return u.postRepo.GetAllByTitle(title)
+	}
 }

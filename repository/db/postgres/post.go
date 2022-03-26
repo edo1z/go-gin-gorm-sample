@@ -19,3 +19,9 @@ func (r *postRepo) GetAll() ([]*domain.Post, error) {
 	result := r.db.Find(&posts)
 	return posts, result.Error
 }
+
+func (r *postRepo) GetAllByTitle(title string) ([]*domain.Post, error) {
+	var posts []*domain.Post
+	result := r.db.Where("title LIKE ?", "%"+title+"%").Find(&posts)
+	return posts, result.Error
+}

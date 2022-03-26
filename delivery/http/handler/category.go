@@ -2,6 +2,8 @@ package handler
 
 import (
 	"net/http"
+	"web3ten0/go-gin-gorm-sample/delivery/http/handler/response"
+	"web3ten0/go-gin-gorm-sample/delivery/http/viewmodel"
 	"web3ten0/go-gin-gorm-sample/domain"
 
 	"github.com/gin-gonic/gin"
@@ -16,10 +18,15 @@ func NewCategoryHandler(cu domain.CategoryUsecase) *CategoryHandler {
 }
 
 func (h *CategoryHandler) GetAll(c *gin.Context) {
-	categories, err := h.categoryUsecase.GetAll()
+	var query viewmodel.GetCategoryRquest
+	if err := c.ShouldBindQuery(&query); err != nil {
+		response.Json(http.StatusBadRequest, nil, err, c)
+		return
+	}
+	categories, err := h.categoryUsecase.GetAll(query.Name)
 	if err != nil {
-		c.String(http.StatusInternalServerError, err.Error())
+		response.Json(http.StatusInternalServerError, nil, err, c)
 	} else {
-		c.JSON(http.StatusOK, categories)
+		response.Json(http.StatusOK, categories, nil, c)
 	}
 }

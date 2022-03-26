@@ -19,3 +19,9 @@ func (r *categoryRepo) GetAll() ([]*domain.Category, error) {
 	result := r.db.Find(&categories)
 	return categories, result.Error
 }
+
+func (r *categoryRepo) GetAllByName(name string) ([]*domain.Category, error) {
+	var categories []*domain.Category
+	result := r.db.Where("name LIKE ?", "%"+name+"%").Find(&categories)
+	return categories, result.Error
+}

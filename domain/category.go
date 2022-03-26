@@ -6,9 +6,10 @@ type Category struct {
 }
 
 type CategoryUsecase interface {
-	GetAll() ([]*Category, error)
+	GetAll(name string) ([]*Category, error)
 }
 
 type CategoryRepository interface {
 	GetAll() ([]*Category, error)
+	GetAllByName(name string) ([]*Category, error)
 }
