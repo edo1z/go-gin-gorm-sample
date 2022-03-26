@@ -24,5 +24,13 @@ services:
       - db_data:/var/lib/postgresql/data
     image: go-gin-gorm-sample-db
     container_name: go-gin-gorm-sample-db
+  swagger-ui:
+    image: swaggerapi/swagger-ui
+    ports:
+      - 8001:8080
+    volumes:
+      - ../openapi.yaml:/openapi.yaml
+    environment:
+      SWAGGER_JSON: /openapi.yaml
 volumes:
   db_data:

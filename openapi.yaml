@@ -1,10 +1,10 @@
 openapi: 3.0.1
 info:
-  title: Rust Axum+SQLx Sample
-  description: ""
+  title: GO Gin+GORM Sample
+  description: ''
   version: 0.0.1
 servers:
-  - url: "http://localhost:8085"
+  - url: 'http://localhost:8080'
 schemes:
   - http
 produces:
@@ -27,15 +27,15 @@ paths:
           required: false
           type: string
       responses:
-        "200":
+        '200':
           description: return users
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/user/User"
-  "/users/view/{userId}":
+                  $ref: '#/components/schemas/user/User'
+  '/users/view/{userId}':
     get:
       tags:
         - user
@@ -48,12 +48,12 @@ paths:
           required: true
           type: integer
       responses:
-        "200":
+        '200':
           description: return users
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/user/User"
+                $ref: '#/components/schemas/user/User'
   /users/add:
     post:
       tags:
@@ -65,14 +65,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/user/NewUser"
+              $ref: '#/components/schemas/user/NewUser'
       responses:
-        "200":
+        '200':
           description: return userId
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/user/UserId"
+                $ref: '#/components/schemas/user/UserId'
   /users/edit/img/prof:
     post:
       tags:
@@ -83,14 +83,14 @@ paths:
         content:
           multipart/form-data:
             schema:
-              $ref: "#/components/schemas/user/ProfImg"
+              $ref: '#/components/schemas/user/ProfImg'
       responses:
-        "200":
+        '200':
           description: return userId
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/user/ImgUrl"
+                $ref: '#/components/schemas/user/ImgUrl'
   /categories:
     get:
       tags:
@@ -104,14 +104,14 @@ paths:
           required: false
           type: string
       responses:
-        "200":
+        '200':
           description: return categories
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/category/Category"
+                  $ref: '#/components/schemas/category/Category'
   /categories/add:
     post:
       tags:
@@ -123,14 +123,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/category/CreateCategory"
+              $ref: '#/components/schemas/category/CreateCategory'
       responses:
-        "200":
+        '200':
           description: return categoryId
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/category/CategoryId"
+                $ref: '#/components/schemas/category/CategoryId'
   /posts:
     get:
       tags:
@@ -144,14 +144,14 @@ paths:
           required: false
           type: string
       responses:
-        "200":
+        '200':
           description: return posts
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/post/Post"
+                  $ref: '#/components/schemas/post/Post'
   /posts/add:
     post:
       tags:
@@ -163,14 +163,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/post/CreatePost"
+              $ref: '#/components/schemas/post/CreatePost'
       responses:
-        "200":
+        '200':
           description: return postId
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/post/PostId"
+                $ref: '#/components/schemas/post/PostId'
 components:
   schemas:
     user:

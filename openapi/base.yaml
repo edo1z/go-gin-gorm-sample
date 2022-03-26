@@ -1,10 +1,10 @@
 openapi: '3.0.1'
 info:
-  title: 'Rust Axum+SQLx Sample'
+  title: 'GO Gin+GORM Sample'
   description: ''
   version: 0.0.1
 servers:
-  - url: http://localhost:8085
+  - url: http://localhost:8080
 schemes: 
   - http
 produces:
