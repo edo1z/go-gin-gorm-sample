@@ -5,6 +5,7 @@ import (
 	"web3ten0/go-gin-gorm-sample/repository/db/postgres"
 	"web3ten0/go-gin-gorm-sample/usecase"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
 
@@ -25,6 +26,9 @@ func main() {
 	postHandler := handler.NewPostHandler(postUsecase)
 
 	r := gin.Default()
+	r.Use(cors.New(cors.Config{
+		AllowOrigins: []string{"http://localhost:8001"},
+	}))
 	r.GET("/users", userHandler.GetAll)
 	r.GET("/categories", categoryHandler.GetAll)
 	r.GET("/posts", postHandler.GetAll)
