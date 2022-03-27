@@ -18,7 +18,7 @@ func NewPostHandler(pu domain.PostUsecase) *PostHandler {
 }
 
 func (h *PostHandler) GetAll(c *gin.Context) {
-	var query viewmodel.GetPostRquest
+	var query viewmodel.PostTitle
 	if err := c.ShouldBindQuery(&query); err != nil {
 		response.Json(http.StatusBadRequest, nil, err, c)
 		return
@@ -28,5 +28,19 @@ func (h *PostHandler) GetAll(c *gin.Context) {
 		response.Json(http.StatusInternalServerError, nil, err, c)
 	} else {
 		response.Json(http.StatusOK, posts, nil, c)
+	}
+}
+
+func (h *PostHandler) GetById(c *gin.Context) {
+	var params viewmodel.PostID
+	if err := c.ShouldBindUri(&params); err != nil {
+		response.Json(http.StatusBadRequest, nil, err, c)
+		return
+	}
+	post, err := h.postUsecase.GetById(params.ID)
+	if err != nil {
+		response.Json(http.StatusInternalServerError, nil, err, c)
+	} else {
+		response.Json(http.StatusOK, post, nil, c)
 	}
 }

@@ -25,3 +25,9 @@ func (r *userRepo) GetAllByName(name string) ([]*domain.User, error) {
 	result := r.db.Where("name LIKE ?", "%"+name+"%").Find(&users)
 	return users, result.Error
 }
+
+func (r *userRepo) GetById(id int) (*domain.User, error) {
+	var user *domain.User
+	result := r.db.First(&user, id)
+	return user, result.Error
+}

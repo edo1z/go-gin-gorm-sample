@@ -17,3 +17,7 @@ func (u *categoryUsecase) GetAll(name string) ([]*domain.Category, error) {
 		return u.categoryRepo.GetAllByName(name)
 	}
 }
+
+func (u *categoryUsecase) GetById(id int) (*domain.Category, error) {
+	return u.categoryRepo.GetById(id)
+}

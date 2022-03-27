@@ -10,9 +10,11 @@ type Post struct {
 
 type PostUsecase interface {
 	GetAll(title string) ([]*Post, error)
+	GetById(id int) (*Post, error)
 }
 
 type PostRepository interface {
 	GetAll() ([]*Post, error)
 	GetAllByTitle(title string) ([]*Post, error)
+	GetById(id int) (*Post, error)
 }

@@ -17,3 +17,7 @@ func (u *postUsecase) GetAll(title string) ([]*domain.Post, error) {
 		return u.postRepo.GetAllByTitle(title)
 	}
 }
+
+func (u *postUsecase) GetById(id int) (*domain.Post, error) {
+	return u.postRepo.GetById(id)
+}

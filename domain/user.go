@@ -9,9 +9,11 @@ type User struct {
 
 type UserUsecase interface {
 	GetAll(name string) ([]*User, error)
+	GetById(id int) (*User, error)
 }
 
 type UserRepository interface {
 	GetAll() ([]*User, error)
 	GetAllByName(name string) ([]*User, error)
+	GetById(id int) (*User, error)
 }

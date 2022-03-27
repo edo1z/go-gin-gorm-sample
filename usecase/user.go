@@ -19,3 +19,7 @@ func (u *userUsecase) GetAll(name string) ([]*domain.User, error) {
 		return u.userRepo.GetAllByName(name)
 	}
 }
+
+func (u *userUsecase) GetById(id int) (*domain.User, error) {
+	return u.userRepo.GetById(id)
+}

@@ -18,7 +18,7 @@ func NewUserHandler(uu domain.UserUsecase) *UserHandler {
 }
 
 func (h *UserHandler) GetAll(c *gin.Context) {
-	var query viewmodel.GetUsersRquest
+	var query viewmodel.UserName
 	if err := c.ShouldBindQuery(&query); err != nil {
 		response.Json(http.StatusBadRequest, nil, err, c)
 		return
@@ -28,5 +28,19 @@ func (h *UserHandler) GetAll(c *gin.Context) {
 		response.Json(http.StatusInternalServerError, nil, err, c)
 	} else {
 		response.Json(http.StatusOK, users, nil, c)
+	}
+}
+
+func (h *UserHandler) GetById(c *gin.Context) {
+	var params viewmodel.UserID
+	if err := c.ShouldBindUri(&params); err != nil {
+		response.Json(http.StatusBadRequest, nil, err, c)
+		return
+	}
+	user, err := h.userUsecase.GetById(params.ID)
+	if err != nil {
+		response.Json(http.StatusInternalServerError, nil, err, c)
+	} else {
+		response.Json(http.StatusOK, user, nil, c)
 	}
 }

@@ -18,7 +18,7 @@ func NewCategoryHandler(cu domain.CategoryUsecase) *CategoryHandler {
 }
 
 func (h *CategoryHandler) GetAll(c *gin.Context) {
-	var query viewmodel.GetCategoryRquest
+	var query viewmodel.CategoryName
 	if err := c.ShouldBindQuery(&query); err != nil {
 		response.Json(http.StatusBadRequest, nil, err, c)
 		return
@@ -28,5 +28,19 @@ func (h *CategoryHandler) GetAll(c *gin.Context) {
 		response.Json(http.StatusInternalServerError, nil, err, c)
 	} else {
 		response.Json(http.StatusOK, categories, nil, c)
+	}
+}
+
+func (h *CategoryHandler) GetById(c *gin.Context) {
+	var params viewmodel.CategoryID
+	if err := c.ShouldBindUri(&params); err != nil {
+		response.Json(http.StatusBadRequest, nil, err, c)
+		return
+	}
+	category, err := h.categoryUsecase.GetById(params.ID)
+	if err != nil {
+		response.Json(http.StatusInternalServerError, nil, err, c)
+	} else {
+		response.Json(http.StatusOK, category, nil, c)
 	}
 }

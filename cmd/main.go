@@ -30,7 +30,10 @@ func main() {
 		AllowOrigins: []string{"http://localhost:8001"},
 	}))
 	r.GET("/users", userHandler.GetAll)
+	r.GET("/users/view/:id", userHandler.GetById)
 	r.GET("/categories", categoryHandler.GetAll)
+	r.GET("/categories/view/:id", categoryHandler.GetById)
 	r.GET("/posts", postHandler.GetAll)
+	r.GET("/posts/view/:id", postHandler.GetById)
 	r.Run()
 }

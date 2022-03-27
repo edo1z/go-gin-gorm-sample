@@ -25,3 +25,9 @@ func (r *categoryRepo) GetAllByName(name string) ([]*domain.Category, error) {
 	result := r.db.Where("name LIKE ?", "%"+name+"%").Find(&categories)
 	return categories, result.Error
 }
+
+func (r *categoryRepo) GetById(id int) (*domain.Category, error) {
+	var category *domain.Category
+	result := r.db.First(&category, id)
+	return category, result.Error
+}
