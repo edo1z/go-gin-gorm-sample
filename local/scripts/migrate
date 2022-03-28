@@ -1,1 +1,1 @@
-docker exec go-gin-gorm-sample-api migrate -database "postgres://user:password@db:5432/database?sslmode=disable" -path "./repository/db/postgres/migration" $1 $2 $3
+docker exec -it go-gin-gorm-sample-api migrate -database postgres://user:password@db:5432/database?sslmode=disable -path ./repository/db/postgres/migration $1 $2 $3

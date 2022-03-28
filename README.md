@@ -6,7 +6,6 @@
 git clone https://github.com/web3ten0/go-gin-gorm-sample.git
 cd go-gin-gorm-sample/local
 docker-compose up -d
-sh scripts/exec_init_db
 ```
 
 ## Config
@@ -17,13 +16,22 @@ cp config.json.example config.json
 
 ## Migration
 
-- 参照: https://github.com/launchbadge/sqlx/tree/master/sqlx-cli
+- マイグレーションに下記を利用している。
+  - https://github.com/golang-migrate/migrate
+- `docker-compose.yml`の`services.api.environment`で、`POSTGRES_URL`を設定している。
+- apiコンテナにアタッチして、下記を実行するとマイグレーションできる。
+
+```shell
+migrate -database ${POSTGRES_URL} -path ./repository/db/postgres/migration up
+```
+
+- ローカル環境で、`local/scripts/migrate`を実行すると、apiコンテナ内で上記マイグレーションを実行できる。
 
 ```shell
 cd local/scripts
-sh migrate add -r users
-sh migrate run
-sh migrate revert
+sh migrate up
+sh migrate down
+sh migrate force 202203281529 up
 ```
 
 ## Swagger
@@ -45,4 +53,10 @@ sh migrate revert
 
 ```shell
 > sh openapi/bundle
+```
+
+## Test
+
+```shell
+go test ./...
 ```
