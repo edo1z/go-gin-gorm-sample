@@ -26,8 +26,14 @@ func (r *userRepo) GetAllByName(name string) ([]*domain.User, error) {
 	return users, result.Error
 }
 
-func (r *userRepo) GetById(id int) (*domain.User, error) {
+func (r *userRepo) GetById(id uint) (*domain.User, error) {
 	var user *domain.User
 	result := r.db.First(&user, id)
 	return user, result.Error
+}
+
+func (r *userRepo) Create(user *domain.User) (userID uint, err error) {
+	err = r.db.Create(&user).Error
+	userID = user.ID
+	return
 }

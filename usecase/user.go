@@ -20,6 +20,10 @@ func (u *userUsecase) GetAll(name string) ([]*domain.User, error) {
 	}
 }
 
-func (u *userUsecase) GetById(id int) (*domain.User, error) {
+func (u *userUsecase) GetById(id uint) (*domain.User, error) {
 	return u.userRepo.GetById(id)
+}
+
+func (u *userUsecase) Create(user *domain.User) (userID uint, err error) {
+	return u.userRepo.Create(user)
 }

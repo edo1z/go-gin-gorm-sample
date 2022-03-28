@@ -44,3 +44,18 @@ func (h *UserHandler) GetById(c *gin.Context) {
 		response.Json(http.StatusOK, user, nil, c)
 	}
 }
+
+func (h *UserHandler) Create(c *gin.Context) {
+	var data viewmodel.UserForCreate
+	if err := c.ShouldBindJSON(&data); err != nil {
+		response.Json(http.StatusBadRequest, nil, err, c)
+		return
+	}
+	userID, err := h.userUsecase.Create(data.ToModel())
+	if err != nil {
+		response.Json(http.StatusInternalServerError, nil, err, c)
+	} else {
+		data := viewmodel.UserID{ID: userID}
+		response.Json(http.StatusOK, data, nil, c)
+	}
+}

@@ -26,11 +26,12 @@ func main() {
 	postHandler := handler.NewPostHandler(postUsecase)
 
 	r := gin.Default()
-	r.Use(cors.New(cors.Config{
-		AllowOrigins: []string{"http://localhost:8001"},
-	}))
+	config := cors.DefaultConfig()
+	config.AllowOrigins = []string{"http://localhost:8001"}
+	r.Use(cors.New(config))
 	r.GET("/users", userHandler.GetAll)
 	r.GET("/users/view/:id", userHandler.GetById)
+	r.POST("/users/add", userHandler.Create)
 	r.GET("/categories", categoryHandler.GetAll)
 	r.GET("/categories/view/:id", categoryHandler.GetById)
 	r.GET("/posts", postHandler.GetAll)
