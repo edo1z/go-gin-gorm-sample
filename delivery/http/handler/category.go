@@ -44,3 +44,18 @@ func (h *CategoryHandler) GetById(c *gin.Context) {
 		response.Json(http.StatusOK, category, nil, c)
 	}
 }
+
+func (h *CategoryHandler) Create(c *gin.Context) {
+	var data viewmodel.CategoryForCreate
+	if err := c.ShouldBindJSON(&data); err != nil {
+		response.Json(http.StatusBadRequest, nil, err, c)
+		return
+	}
+	categoryID, err := h.categoryUsecase.Create(data.ToModel())
+	if err != nil {
+		response.Json(http.StatusInternalServerError, nil, err, c)
+	} else {
+		data := viewmodel.CategoryID{ID: categoryID}
+		response.Json(http.StatusOK, data, nil, c)
+	}
+}

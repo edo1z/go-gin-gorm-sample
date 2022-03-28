@@ -26,8 +26,14 @@ func (r *categoryRepo) GetAllByName(name string) ([]*domain.Category, error) {
 	return categories, result.Error
 }
 
-func (r *categoryRepo) GetById(id int) (*domain.Category, error) {
+func (r *categoryRepo) GetById(id uint) (*domain.Category, error) {
 	var category *domain.Category
 	result := r.db.First(&category, id)
 	return category, result.Error
+}
+
+func (r *categoryRepo) Create(category *domain.Category) (categoryID uint, err error) {
+	err = r.db.Create(&category).Error
+	categoryID = category.ID
+	return
 }

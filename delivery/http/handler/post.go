@@ -44,3 +44,18 @@ func (h *PostHandler) GetById(c *gin.Context) {
 		response.Json(http.StatusOK, post, nil, c)
 	}
 }
+
+func (h *PostHandler) Create(c *gin.Context) {
+	var data viewmodel.PostForCreate
+	if err := c.ShouldBindJSON(&data); err != nil {
+		response.Json(http.StatusBadRequest, nil, err, c)
+		return
+	}
+	postID, err := h.postUsecase.Create(data.ToModel())
+	if err != nil {
+		response.Json(http.StatusInternalServerError, nil, err, c)
+	} else {
+		data := viewmodel.PostID{ID: postID}
+		response.Json(http.StatusOK, data, nil, c)
+	}
+}

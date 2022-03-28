@@ -34,7 +34,9 @@ func main() {
 	r.POST("/users/add", userHandler.Create)
 	r.GET("/categories", categoryHandler.GetAll)
 	r.GET("/categories/view/:id", categoryHandler.GetById)
+	r.POST("/categories/add", categoryHandler.Create)
 	r.GET("/posts", postHandler.GetAll)
 	r.GET("/posts/view/:id", postHandler.GetById)
+	r.POST("/posts/add", postHandler.Create)
 	r.Run()
 }

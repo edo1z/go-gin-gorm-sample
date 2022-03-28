@@ -18,6 +18,10 @@ func (u *categoryUsecase) GetAll(name string) ([]*domain.Category, error) {
 	}
 }
 
-func (u *categoryUsecase) GetById(id int) (*domain.Category, error) {
+func (u *categoryUsecase) GetById(id uint) (*domain.Category, error) {
 	return u.categoryRepo.GetById(id)
+}
+
+func (u *categoryUsecase) Create(category *domain.Category) (categoryID uint, err error) {
+	return u.categoryRepo.Create(category)
 }

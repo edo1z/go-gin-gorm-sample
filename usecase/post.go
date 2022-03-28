@@ -18,6 +18,10 @@ func (u *postUsecase) GetAll(title string) ([]*domain.Post, error) {
 	}
 }
 
-func (u *postUsecase) GetById(id int) (*domain.Post, error) {
+func (u *postUsecase) GetById(id uint) (*domain.Post, error) {
 	return u.postRepo.GetById(id)
+}
+
+func (u *postUsecase) Create(post *domain.Post) (postID uint, err error) {
+	return u.postRepo.Create(post)
 }

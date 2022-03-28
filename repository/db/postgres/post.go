@@ -26,8 +26,14 @@ func (r *postRepo) GetAllByTitle(title string) ([]*domain.Post, error) {
 	return posts, result.Error
 }
 
-func (r *postRepo) GetById(id int) (*domain.Post, error) {
+func (r *postRepo) GetById(id uint) (*domain.Post, error) {
 	var post *domain.Post
 	result := r.db.First(&post, id)
 	return post, result.Error
+}
+
+func (r *postRepo) Create(post *domain.Post) (postID uint, err error) {
+	err = r.db.Create(&post).Error
+	postID = post.ID
+	return
 }
