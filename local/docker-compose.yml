@@ -11,6 +11,8 @@ services:
     command: /bin/sh -c "go mod tidy -compat=1.17 && air -c .air.toml"
     image: go-gin-gorm-sample-api
     container_name: go-gin-gorm-sample-api
+    environment:
+      POSTGRES_URL: "postgres://user:password@db:5432/database?sslmode=disable"
   db:
     build: ./db
     restart: always
@@ -21,7 +23,7 @@ services:
     ports:
       - "5433:5432"
     volumes:
-      - db_data:/var/lib/postgresql/data
+      - go_gin_gorm_sample_db_data:/var/lib/postgresql/data
     image: go-gin-gorm-sample-db
     container_name: go-gin-gorm-sample-db
   swagger-ui:
@@ -33,4 +35,4 @@ services:
     environment:
       SWAGGER_JSON: /openapi.yaml
 volumes:
-  db_data:
+  go_gin_gorm_sample_db_data:

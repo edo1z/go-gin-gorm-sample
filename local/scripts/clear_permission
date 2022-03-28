@@ -1,1 +1,0 @@
-docker exec local_api_1 chown -R 1000:1001 /api
